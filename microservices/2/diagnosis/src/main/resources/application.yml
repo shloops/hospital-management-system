@@ -1,0 +1,15 @@
+server:
+  port: 9002
+spring:
+  security:
+    user:
+      name: admin
+      password: admin
+
+  datasource:
+    url: jdbc:mysql://localhost/diagnosis?useSSL=false
+    username: root
+    password: root
+    jpa:
+      hibernate:
+        ddl-auto: update

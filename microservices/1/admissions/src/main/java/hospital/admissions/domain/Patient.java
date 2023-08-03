@@ -22,7 +22,18 @@ public class Patient {
     @Column(name = "symptom", nullable = false)
     private List<String> symptoms;
 
+    private boolean forwardedToDiagnosis;
+
     public Patient() {
+    }
+
+    public Patient(Long id, String firstName, String lastName, String uuid, List<String> symptoms, boolean forwardedToDiagnosis) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.uuid = uuid;
+        this.symptoms = symptoms;
+        this.forwardedToDiagnosis = forwardedToDiagnosis;
     }
 
     public Patient(Long id, String firstName, String lastName, String uuid, List<String> symptoms) {
@@ -31,6 +42,14 @@ public class Patient {
         this.lastName = lastName;
         this.uuid = uuid;
         this.symptoms = symptoms;
+    }
+
+    public boolean isForwardedToDiagnosis() {
+        return forwardedToDiagnosis;
+    }
+
+    public void setForwardedToDiagnosis(boolean forwardedToDiagnosis) {
+        this.forwardedToDiagnosis = forwardedToDiagnosis;
     }
 
     public Long getId() {

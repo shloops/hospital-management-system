@@ -1,8 +1,10 @@
 package hospital.admissions.logic;
 
+import hospital.admissions.communication.client.DiagnosesClient;
 import hospital.admissions.domain.Patient;
 import hospital.admissions.repository.PatientRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClientException;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,15 +13,26 @@ import java.util.Optional;
 public class Admission {
     private final PatientRepository patientRepository;
     private final UUIDProvider uuidProvider;
+    private final PatientDTOMapper patientDTOMapper;
+    private final DiagnosesClient diagnosesClient;
 
-    public Admission(PatientRepository patientRepository, UUIDProvider uuidProvider) {
+    public Admission(PatientRepository patientRepository, UUIDProvider uuidProvider, PatientDTOMapper patientDTOMapper, DiagnosesClient diagnosesClient) {
         this.patientRepository = patientRepository;
         this.uuidProvider = uuidProvider;
+        this.patientDTOMapper = patientDTOMapper;
+        this.diagnosesClient = diagnosesClient;
     }
 
     public Patient admit(Patient patient) {
         uuidProvider.provideUuid(patient);
-        return patientRepository.save(patient);
+        try {
+            diagnosesClient.forwardPatientForDiagnosis(patientDTOMapper.mapPatientToDTO(patient));
+            patient.setForwardedToDiagnosis(true);
+            return patientRepository.save(patient);
+        } catch (RestClientException rce) {
+            System.out.println(rce.getMessage());
+            return patientRepository.save(patient);
+        }
     }
     public Optional<Patient> findPatientByName(String fullName) {
         try {

@@ -15,7 +15,7 @@ class UUIDProviderTest {
 
     @MockBean
     SecurityFilterChain securityFilterChain;
-    private final Patient testPatient = new Patient((long) 1, null, "test", null, null);
+    private final Patient testPatient = new Patient((long) 1, null, "test", null, null, false);
 
 
     @Test
