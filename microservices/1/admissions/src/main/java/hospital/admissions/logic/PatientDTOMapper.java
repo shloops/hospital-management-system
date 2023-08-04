@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class PatientDTOMapper {
     public PatientDTO mapPatientToDTO(Patient patient) {
-        return new PatientDTO(patient.getUuid(), patient.getFirstName(), patient.getLastName(), patient.getSymptoms());
+        return new PatientDTO(patient.getUuid(), patient.getFirstName(), patient.getLastName()
+                //, patient.getSymptoms()
+        );
     }
 }

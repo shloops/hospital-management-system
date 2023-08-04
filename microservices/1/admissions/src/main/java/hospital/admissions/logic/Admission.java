@@ -26,7 +26,7 @@ public class Admission {
     public Patient admit(Patient patient) {
         uuidProvider.provideUuid(patient);
         try {
-            diagnosesClient.forwardPatientForDiagnosis(patientDTOMapper.mapPatientToDTO(patient));
+            //diagnosesClient.forwardPatientForDiagnosis(patientDTOMapper.mapPatientToDTO(patient));
             patient.setForwardedToDiagnosis(true);
             return patientRepository.save(patient);
         } catch (RestClientException rce) {
