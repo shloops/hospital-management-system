@@ -14,6 +14,7 @@ public class DiagnosesClient {
         this.diagnosisURL = diagnosisURL;
     }
 
+
     public String forwardPatientForDiagnosis(PatientDTO patientDTO) {
         System.out.println(diagnosisURL);
         return restTemplate.postForObject(diagnosisURL, patientDTO, String.class);

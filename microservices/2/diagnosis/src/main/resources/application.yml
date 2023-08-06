@@ -13,3 +13,7 @@ spring:
     jpa:
       hibernate:
         ddl-auto: update
+infermedica:
+  urls:
+    base: "https://api.infermedica.com/v3"
+    parse: "/parse"

@@ -1,4 +1,4 @@
-package hospital.admissions.security;
+package hospital.diagnosis.security;
 
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;

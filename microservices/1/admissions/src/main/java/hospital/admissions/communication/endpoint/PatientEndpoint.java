@@ -23,7 +23,7 @@ public class PatientEndpoint {
         return admission.admit(patient);
     }
 
-    @PostMapping("/forward")
+    @PostMapping("/forward")//(value = "/forward", consumes = "application/json", produces = "application/json")
     String forwardPatientForDiagnosis(@RequestBody PatientDTO patientDTO) {
         return diagnosesClient.forwardPatientForDiagnosis(patientDTO);
     }
