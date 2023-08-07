@@ -17,3 +17,4 @@ infermedica:
   urls:
     base: "https://api.infermedica.com/v3"
     parse: "/parse"
+    diagnosis: "/diagnosis"

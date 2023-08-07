@@ -1,6 +1,7 @@
 package hospital.diagnosis.communication.endpoint;
 
 import hospital.diagnosis.communication.client.ParseClient;
+import hospital.diagnosis.domain.Patient;
 import hospital.diagnosis.logic.DiagnosisService;
 import hospital.diagnosis.persistence.PatientDTO;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +20,10 @@ public class DiagnosisEndpoint {
         this.diagnosisService = diagnosisService;
     }
 
-
+    @PostMapping("/diagnose")
+    Patient diagnose(@RequestBody PatientDTO patientDTO) {
+        return diagnosisService.diagnose(patientDTO);
+    }
     @PostMapping
     String submitPatientForDiagnosis(@RequestBody PatientDTO patientDTO) {
         return patientDTO.getUuid();

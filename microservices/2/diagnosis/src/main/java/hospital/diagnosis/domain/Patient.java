@@ -2,8 +2,8 @@ package hospital.diagnosis.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 public class Patient {
@@ -21,7 +21,7 @@ public class Patient {
 //    @CollectionTable(name = "symptoms", joinColumns = @JoinColumn(name = "patient_id"))
 //    @Column(name = "symptom", nullable = false)
 //    private List<String> symptoms;
-    private String descriptionOfIllness;
+
     @Enumerated(EnumType.STRING)
     private Sex sex;
 //    @Min(0)
@@ -29,8 +29,8 @@ public class Patient {
 //    private int age;
 
     private Age age;
-    private Set<Diagnosis> diagnoses;
-
+    private List<Diagnosis> diagnoses;
+    private List<Symptom> symptoms;
     public Patient() {
     }
 
@@ -40,13 +40,6 @@ public class Patient {
         this.age = age;
     }
 
-    public Set<Diagnosis> getDiagnoses() {
-        return diagnoses;
-    }
-
-    public void setDiagnoses(Set<Diagnosis> diagnoses) {
-        this.diagnoses = diagnoses;
-    }
 
     public Sex getSex() {
         return sex;
@@ -94,12 +87,33 @@ public class Patient {
         this.lastName = lastName;
     }
 
-    public String getDescriptionOfIllness() {
-        return descriptionOfIllness;
+    public List<Diagnosis> getDiagnoses() {
+        return diagnoses;
     }
 
-    public void setDescriptionOfIllness(String descriptionOfIllness) {
-        this.descriptionOfIllness = descriptionOfIllness;
+    public void setDiagnoses(List<Diagnosis> diagnoses) {
+        this.diagnoses = diagnoses;
+    }
+
+    public List<Symptom> getSymptoms() {
+        return symptoms;
+    }
+
+    public void setSymptoms(List<Symptom> symptoms) {
+        this.symptoms = symptoms;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Patient patient = (Patient) o;
+        return Objects.equals(id, patient.id) && Objects.equals(firstName, patient.firstName) && Objects.equals(lastName, patient.lastName) && Objects.equals(uuid, patient.uuid) && sex == patient.sex && Objects.equals(age, patient.age) && Objects.equals(diagnoses, patient.diagnoses) && Objects.equals(symptoms, patient.symptoms);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, uuid, sex, age, diagnoses, symptoms);
     }
 
     @Override
@@ -109,23 +123,10 @@ public class Patient {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", uuid='" + uuid + '\'' +
-                ", descriptionOfIllness='" + descriptionOfIllness + '\'' +
                 ", sex=" + sex +
                 ", age=" + age +
                 ", diagnoses=" + diagnoses +
+                ", symptoms=" + symptoms +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Patient patient = (Patient) o;
-        return Objects.equals(id, patient.id) && Objects.equals(firstName, patient.firstName) && Objects.equals(lastName, patient.lastName) && Objects.equals(uuid, patient.uuid) && Objects.equals(descriptionOfIllness, patient.descriptionOfIllness) && sex == patient.sex && Objects.equals(age, patient.age) && Objects.equals(diagnoses, patient.diagnoses);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, firstName, lastName, uuid, descriptionOfIllness, sex, age, diagnoses);
     }
 }
